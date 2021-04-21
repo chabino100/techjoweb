@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="_template.xhtml">
+
+	<ui:define name="title">TechJob Login</ui:define>
+	<ui:define name="content">
+
+		<p:messages id="messages">
+			<p:autoUpdate />
+		</p:messages>
+
+		<h:form>
+			<p:card class="card-form">
+
+				<div class="ui-fluid">
+					<div class="p-field">
+						<label for="name">Username</label>
+						<p:inputText id="name" type="text" value="#{userBean.user.name}"
+							required="true">
+							<f:ajax event="blur" render="messages" />
+							<f:validateLength minimum="2" />
+						</p:inputText>
+					</div>
+					<div class="p-field">
+						<label for="email">Email</label>
+						<p:inputText id="email" type="email"
+							value="#{userBean.user.email}" required="true">
+							<f:ajax event="blur" render="messages" />
+							<f:validateLength minimum="5" />
+						</p:inputText>
+					</div>
+					<div class="p-field">
+						<label for="address">Address</label>
+						<p:inputText id="address" type="text"
+							value="#{userBean.user.address}" required="true">
+							<f:ajax event="blur" render="messages" />
+							<f:validateLength minimum="5" />
+						</p:inputText>
+					</div>
+					<div class="p-field">
+						<label for="password">Password</label>
+						<p:password id="feedback" type="text" feedback="true"
+							value="#{userBean.user.password}" required="true">
+							<f:ajax event="blur" render="messages" />
+							<f:validateLength minimum="8" />
+						</p:password>
+					</div>
+				</div>
+
+				<f:facet name="footer">
+					<p:commandButton icon="pi pi-user-plus" value="Register"
+						action="#{userBean.save}">
+					</p:commandButton>
+				</f:facet>
+
+			</p:card>
+		</h:form>
+
+		<h:form>
+			<p:dataTable value="#{userBean.users}" var="user">
+				<p:column headerText="Username">
+					<h:outputText value="#{user.name}" />
+				</p:column>
+				<p:column headerText="Password">
+					<h:outputText value="#{user.password}" />
+				</p:column>
+				<p:column headerText="Email">
+					<h:outputText value="#{user.email}" />
+				</p:column>
+				<p:column headerText="Adress">
+					<h:outputText value="#{user.address}" />
+				</p:column>
+			</p:dataTable>
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+
+</html>
